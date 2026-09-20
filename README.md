@@ -8,6 +8,11 @@
 > **From Self-Declared Skills to Verified Competency.**
 > *Learn. Practice. Demonstrate. Verify. Analyze. Improve. Connect.*
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-EDUTECH_Vercel_App-0c8de9?style=for-the-badge&logo=vercel)](https://edutech-axvercel.vercel.app/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Prarambh--2.0--Hackathon-181717?style=for-the-badge&logo=github)](https://github.com/Shree0802/Prarambh-2.0-Hackthaon)
+
+🌐 **Live Deployed Prototype**: [https://edutech-axvercel.vercel.app/](https://edutech-axvercel.vercel.app/)
+
 ---
 
 ## 1. Product Vision & Ecosystem Architecture
@@ -78,6 +83,7 @@ LEARN → PRACTICE → DEMONSTRATE → VERIFY → MEASURE → ANALYZE → IDENTI
 * **Database**: MongoDB & Mongoose schemas with an automatic in-memory fallback store for offline/demo environments.
 * **AI Engine**: Google Gemini API (`@google/generative-ai`) with deterministic fallback engines.
 * **Auth**: JWT, bcryptjs, Role-Based Access Control (`student`, `faculty`, `employer`, `admin`).
+* **Deployment**: Deployed on Vercel at [https://edutech-axvercel.vercel.app/](https://edutech-axvercel.vercel.app/)
 
 ---
 
@@ -98,15 +104,20 @@ LEARN → PRACTICE → DEMONSTRATE → VERIFY → MEASURE → ANALYZE → IDENTI
 
 ---
 
-## 5. Quick Start & Execution
+## 5. Live App & Local Setup
 
-### Backend
+### Live Deployment
+* **Live App URL**: [https://edutech-axvercel.vercel.app/](https://edutech-axvercel.vercel.app/)
+
+### Local Execution
+
+#### Backend
 ```bash
 cd C:\Users\Prathamesh\.gemini\antigravity\scratch\edutech\server
 node index.js
 ```
 
-### Frontend
+#### Frontend
 ```bash
 cd C:\Users\Prathamesh\.gemini\antigravity\scratch\edutech\client
 npm run dev

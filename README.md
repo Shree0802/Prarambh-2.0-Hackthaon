@@ -1,5 +1,10 @@
 # EDUTECH | AI-Powered Evidence-Based Competency & Industry Readiness Ecosystem
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-EDUTECH_Vercel_App-0c8de9?style=for-the-badge&logo=vercel)](https://edutech-axvercel.vercel.app/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Prarambh--2.0--Hackathon-181717?style=for-the-badge&logo=github)](https://github.com/Shree0802/Prarambh-2.0-Hackthaon)
+
+🌐 **Live Deployed Prototype**: https://edutech-axvercel.vercel.app/
+
 > **From Self-Declared Skills to Verified Competency.**
 > *Learn. Practice. Demonstrate. Verify. Analyze. Improve. Connect.*
 

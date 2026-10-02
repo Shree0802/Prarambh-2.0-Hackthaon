@@ -38,12 +38,9 @@ import { CandidateDiscovery } from './pages/Employer/CandidateDiscovery';
 import { AdminDashboard } from './pages/Admin/AdminDashboard';
 import { AdminVerificationCenter } from './pages/Admin/AdminVerificationCenter';
 
-import { JuryShowcaseBanner } from './components/JuryShowcaseBanner';
-
 const AppLayout = ({ children }) => {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
-      <JuryShowcaseBanner />
       <Navbar />
       <div className="flex flex-1">
         <Sidebar />

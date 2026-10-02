@@ -530,7 +530,7 @@ export const demoCompany = {
 
 export const demoJobs = [
   {
-    _id: '660job111111111111111111',
+    _id: '660a99999999999999999999',
     companyName: 'TechNova Labs',
     title: 'Machine Learning Intern',
     description: 'Looking for a ML Intern to build statistical models, feature extraction pipelines, and evaluate neural network metrics.',

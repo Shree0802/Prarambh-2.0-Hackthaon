@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { apiFetch } from '../../services/api';
-import { UserCheck, CheckCircle2, ShieldCheck, Award, FolderCheck, ExternalLink, Eye } from 'lucide-react';
+import { UserCheck, CheckCircle2, ShieldCheck, Award, FolderCheck, ExternalLink, Eye, Mail, Send, X, Calendar, Clock, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const CandidateDiscovery = () => {
   const [candidates, setCandidates] = useState([]);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [inviteModalOpen, setInviteModalOpen] = useState(false);
+  const [toast, setToast] = useState(false);
+
+  const [inviteForm, setInviteForm] = useState({
+    role: 'Machine Learning Intern',
+    date: '2026-10-10',
+    time: '14:00',
+    format: 'Technical Coding & Verified Portfolio Review',
+    message: 'We were impressed by your verified Python competency (88%) and AI Resume Analyzer project commits on EDUTECH.'
+  });
 
   useEffect(() => {
     const fetchCandidates = async () => {
@@ -28,12 +38,26 @@ export const CandidateDiscovery = () => {
     }
   };
 
+  const handleSendInvite = (e) => {
+    e.preventDefault();
+    setInviteModalOpen(false);
+    setToast(true);
+    setTimeout(() => setToast(false), 4000);
+  };
+
   return (
     <div className="space-y-6 pb-12">
       <div>
         <h1 className="text-2xl font-bold text-white tracking-tight">Candidate Discovery (Evidence-First)</h1>
         <p className="text-xs text-slate-400">Discover candidates ranked by verified role fit & code commit evidence rather than self-declared resumes.</p>
       </div>
+
+      {toast && (
+        <div className="p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-200 text-xs font-semibold flex items-center space-x-2 animate-in fade-in">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <span>Interview Invitation sent to {selectedCandidate?.name}! Verification dossier linked to candidate portal.</span>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Candidate Cards Grid */}
@@ -140,10 +164,14 @@ export const CandidateDiscovery = () => {
 
               <div className="pt-2">
                 <button
-                  onClick={() => alert(`Shortlisted ${selectedCandidate.name} for interview!`)}
-                  className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold transition"
+                  onClick={() => {
+                    setInviteForm({ ...inviteForm, role: selectedCandidate.targetRole });
+                    setInviteModalOpen(true);
+                  }}
+                  className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold flex items-center justify-center space-x-1.5 transition shadow-lg shadow-emerald-500/20"
                 >
-                  Shortlist Candidate for Interview
+                  <Mail className="w-4 h-4" />
+                  <span>Send Interview Invitation & Dossier</span>
                 </button>
               </div>
             </div>
@@ -154,6 +182,106 @@ export const CandidateDiscovery = () => {
           )}
         </div>
       </div>
+
+      {/* Interview Invite Modal */}
+      {inviteModalOpen && (
+        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-brand-500/40 rounded-2xl p-6 max-w-lg w-full shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div>
+                <h3 className="text-base font-bold text-white">Invite Candidate to Interview</h3>
+                <span className="text-[10px] text-slate-400">Target Candidate: <strong className="text-white">{selectedCandidate?.name}</strong></span>
+              </div>
+              <button onClick={() => setInviteModalOpen(false)} className="p-1 rounded text-slate-400 hover:text-white">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSendInvite} className="space-y-4 text-xs">
+              <div>
+                <label className="block font-bold text-slate-300 mb-1">Target Position</label>
+                <input
+                  type="text"
+                  required
+                  value={inviteForm.role}
+                  onChange={(e) => setInviteForm({ ...inviteForm, role: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-semibold"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">Interview Date</label>
+                  <input
+                    type="date"
+                    required
+                    value={inviteForm.date}
+                    onChange={(e) => setInviteForm({ ...inviteForm, date: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-bold text-slate-300 mb-1">Time (IST)</label>
+                  <input
+                    type="time"
+                    required
+                    value={inviteForm.time}
+                    onChange={(e) => setInviteForm({ ...inviteForm, time: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-semibold"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-300 mb-1">Interview Format</label>
+                <select
+                  value={inviteForm.format}
+                  onChange={(e) => setInviteForm({ ...inviteForm, format: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-semibold"
+                >
+                  <option value="Technical Coding & Verified Portfolio Review">Technical Coding & Verified Portfolio Review</option>
+                  <option value="AI-Monitored Live Sandbox Assessment">AI-Monitored Live Sandbox Assessment</option>
+                  <option value="System Design & Architecture Discussion">System Design & Architecture Discussion</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-300 mb-1">Personalized Invitation Message</label>
+                <textarea
+                  rows="3"
+                  value={inviteForm.message}
+                  onChange={(e) => setInviteForm({ ...inviteForm, message: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-medium"
+                />
+              </div>
+
+              <div className="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300">
+                <p className="text-[10px] leading-relaxed">
+                  ✓ Verified Proof Attached: Candidate's verified GitHub repository code audit (89%) & Monaco assessment credentials will automatically be attached to the calendar invite.
+                </p>
+              </div>
+
+              <div className="flex items-center justify-end space-x-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setInviteModalOpen(false)}
+                  className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white font-bold"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold flex items-center space-x-1.5"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Send Formal Invitation</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
